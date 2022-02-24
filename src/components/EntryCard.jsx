@@ -1,14 +1,16 @@
-import { useState, useEffect } from 'react';
+import {
+  useState,
+  useEffect,
+  useRef,
+} from 'react';
 
 export default function EntryCard() {
   const [text, setText] = useState('');
+  const input = useRef(null);
 
   useEffect(() => {
-    console.log('Hello i am useEffect');
-    return () => {
-      console.log('Goodbye i am useEffect');
-    };
-  }, []);
+    console.log(input);
+  });
 
   return (
     <div
@@ -24,11 +26,14 @@ export default function EntryCard() {
         padding: 60,
       }}
     >
-      <h1>Your Entered Data </h1>
+      <h1 onClick={()=>{
+        input.current.focus();
+      }} >Your Entered Data </h1>
       <h1>{text}</h1>
       <input
         type='text'
         value={text}
+        ref={input}
         onChange={(e) => setText(e.target.value)}
         placeholder='Type something'
         style={{
